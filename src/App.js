@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import FinalResult from "./Components/FinalResult";
+import MainMenu from "./Components/MainMenu";
+import QuizApp from "./Components/QuizApp";
+import { QuizContext } from "./Context/QuizContext";
 
-function App() {
+
+const App = () => {
+  const [route, setRoute] = useState("menu");
+  const [result,setResult] = useState(0);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <QuizContext.Provider value={{route,setRoute,result,setResult}}>
+      <h1>Welcome to world of quiz App🤞</h1>
+      {route === "menu" && <MainMenu />}
+      {route === "quiz" && <QuizApp />}
+      {route === "result" && <FinalResult />}
+      </QuizContext.Provider>
     </div>
   );
-}
+};
 
 export default App;
